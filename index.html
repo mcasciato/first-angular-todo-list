@@ -37,20 +37,22 @@
             <!-- end of task options -->
 
           </div>
+
+          <!-- edit task -->
+
+          <div ng-show="vm.isInEditMode(task.id)">
+            <input placeholder="task name"
+                   ng-model="vm.currentTask.name">
+            <input type="checkbox"
+                   ng-true-value="true"
+                   ng-false-value="false"
+                   ng-model="vm.currentTask.complete">
+            <button ng-click="vm.save()">Save</button>
+            <button ng-click="vm.cancel()">Cancel</button>
+          </div>
       </div>
 
-            <!-- edit task -->
 
-      <div ng-show="vm.isInEditMode(task.id)">
-        <input placeholder="task name"
-               ng-model="vm.currentTask.name">
-        <input type="checkbox"
-               ng-true-value="true"
-               ng-false-value="false"
-               ng-model="vm.currentTask.complete">
-        <button ng-click="vm.save()">Save</button>
-        <button ng-click="vm.cancel()">Cancel</button>
-      </div>
 
     </div>
 

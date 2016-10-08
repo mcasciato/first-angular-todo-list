@@ -60,7 +60,17 @@ angular
       vm.currentTask = {};
     }
 
-    function startEdit() {
+    function startEdit(id) {
+      reset();
+      selectedId = id;
+      editFlag = true;
+      for (var i = 0; i < vm.list.tasks.length; i++) {
+        var task = vm.list.tasks[i];
+        if (task.id == id) {
+          vm.currentTask.name = task.name
+          vm.currentTask.complete = task.complete
+        }
+      }
 
     }
 
@@ -76,8 +86,8 @@ angular
       return addFlag;
     }
 
-    function isInEditMode() {
-
+    function isInEditMode(id) {
+      return selectedId == id && editFlag;
     }
 
     function add() {
