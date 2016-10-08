@@ -13,11 +13,13 @@ angular
     vm.currentTask = {};
     vm.startAdd = startAdd;
     vm.startEdit = startEdit;
+    vm.startRemove = startRemove;
     vm.isInReadMode = isInReadMode;
     vm.isInAddMode = isInAddMode;
     vm.isInEditMode = isInEditMode;
     vm.add = add;
     vm.save = save;
+    vm.cancel = cancel;
 
     vm.list = {
         name: 'ToDo List',
@@ -62,8 +64,12 @@ angular
 
     }
 
-    function isInReadMode() {
-      return true;
+    function startRemove() {
+
+    }
+
+    function isInReadMode(id) {
+      return selectedId < 0 || selectedId != id;
     }
 
     function isInAddMode() {
@@ -81,6 +87,10 @@ angular
     }
 
     function save() {
+
+    }
+
+    function cancel() {
 
     }
 
