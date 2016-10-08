@@ -8,8 +8,18 @@
     <div ng-controller="ListController as vm">
       <h1>{{ vm.list.name }}</h1>
 
-      <input placeholder="Task Name" ng-model="vm.currentTask.name">
-      <button ng-click="vm.add()">Add</button>
+      <!-- Add Task -->
+
+      <button ng-click="vm.startAdd()"
+              ng-show="!vm.isInAddMode()">Add a Task
+      </button>
+
+      <div ng-show="vm.isInAddMode()">
+        <input placeholder="Task Name"
+               ng-model="vm.currentTask.name">
+
+        <button ng-click="vm.add()">Add</button>
+      </div>
 
       <div ng-repeat="task in vm.list.tasks | orderBy: '$index'">
           <p>
