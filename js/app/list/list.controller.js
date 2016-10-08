@@ -19,7 +19,7 @@ angular
     vm.isInEditMode = isInEditMode;
     vm.add = add;
     vm.save = save;
-    vm.cancel = cancel;
+    vm.cancel = reset;
 
     vm.list = {
         name: 'ToDo List',
@@ -104,10 +104,6 @@ angular
           reset();
         }
       }
-    }
-
-    function cancel() {
-
     }
 
   }
