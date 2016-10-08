@@ -6,6 +6,9 @@ angular
 
     var vm = this;
 
+    vm.currentTask = {};
+    vm.add = add;
+
     vm.list = {
         name: 'ToDo List',
         tasks: [
@@ -30,6 +33,11 @@ angular
               complete: false
             }
         ]
+    }
+
+    function add() {
+      vm.currentTask.complete = false;
+      vm.list.tasks.push(vm.currentTask);
     }
 
   }
