@@ -12,7 +12,7 @@ list = [
   },
   {
     id: 2,
-    name: 'Buy grandma a present
+    name: 'Buy grandma a present'
     complete: false
   },
   {
