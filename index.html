@@ -3,71 +3,82 @@
   <head>
     <meta charset="utf-8">
     <title>ToDo List</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
   <body ng-app="todoApp">
-    <div ng-controller="ListController as vm">
-      <h1>{{ vm.list.name }}</h1>
+    <div class="container">
+      <div ng-controller="ListController as vm">
+        <h1>{{ vm.list.name }}</h1>
 
-      <!-- Add Task -->
+        <!-- Add Task -->
 
-      <button ng-click="vm.startAdd()"
-              ng-show="!vm.isInAddMode()">Add a Task
-      </button>
+        <button ng-click="vm.startAdd()"
+                ng-show="!vm.isInAddMode()">Add a Task
+        </button>
 
-      <div ng-show="vm.isInAddMode()">
-        <input placeholder="Task Name"
-               ng-model="vm.currentTask.name">
+        <div ng-show="vm.isInAddMode()">
+          <input placeholder="Task Name"
+                 ng-model="vm.currentTask.name">
 
-        <button ng-click="vm.add()">Add</button>
-        <button ng-click="vm.cancel()">Cancel</button>
+          <button ng-click="vm.add()">Add</button>
+          <button ng-click="vm.cancel()">Cancel</button>
+        </div>
+
+        <!-- Tasks  -->
+
+        <div ng-repeat="task in vm.list.tasks | orderBy: '$index'">
+            <div ng-show="vm.isInReadMode(task.id)">
+              <p>
+                {{ $index + 1 }}. {{ task.name }} - completed: {{ task.complete }}
+              </p>
+
+              <!-- task options -->
+
+              <button ng-click="vm.startEdit(task.id)">Edit</button>
+              <button ng-click="vm.startRemove(task.id)">Delete</button>
+
+              <!-- end of task options -->
+
+            </div>
+
+            <!-- edit task -->
+
+            <div ng-show="vm.isInEditMode(task.id)">
+              <input placeholder="task name"
+                     ng-model="vm.currentTask.name">
+              <input type="checkbox"
+                     ng-true-value="true"
+                     ng-false-value="false"
+                     ng-model="vm.currentTask.complete">
+              <button ng-click="vm.save()">Save</button>
+              <button ng-click="vm.cancel()">Cancel</button>
+            </div>
+
+            <!-- delete task -->
+
+            <div ng-show="vm.isInRemoveMode(task.id)">
+              <p>
+                {{ task.name }} - completed: {{ task.complete }}
+              </p>
+              <button ng-click="vm.remove(task.id)">Confirm</button>
+              <button ng-click="vm.cancel()">Cancel</button>
+
+            </div>
+        </div>
+
+
+
       </div>
-
-      <!-- Tasks  -->
-
-      <div ng-repeat="task in vm.list.tasks | orderBy: '$index'">
-          <div ng-show="vm.isInReadMode(task.id)">
-            <p>
-              {{ $index + 1 }}. {{ task.name }} - completed: {{ task.complete }}
-            </p>
-
-            <!-- task options -->
-
-            <button ng-click="vm.startEdit(task.id)">Edit</button>
-            <button ng-click="vm.startRemove(task.id)">Delete</button>
-
-            <!-- end of task options -->
-
-          </div>
-
-          <!-- edit task -->
-
-          <div ng-show="vm.isInEditMode(task.id)">
-            <input placeholder="task name"
-                   ng-model="vm.currentTask.name">
-            <input type="checkbox"
-                   ng-true-value="true"
-                   ng-false-value="false"
-                   ng-model="vm.currentTask.complete">
-            <button ng-click="vm.save()">Save</button>
-            <button ng-click="vm.cancel()">Cancel</button>
-          </div>
-
-          <!-- delete task -->
-
-          <div ng-show="vm.isInRemoveMode(task.id)">
-            <p>
-              {{ task.name }} - completed: {{ task.complete }}
-            </p>
-            <button ng-click="vm.remove(task.id)">Confirm</button>
-            <button ng-click="vm.cancel()">Cancel</button>
-
-          </div>
-      </div>
-
 
 
     </div>
-
     <script src="./js/angular.js"></script>
     <script src="./js/app/app.js"></script>
     <script src="./js/app/list/list.controller.js"></script>
